@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Topbar = (props) => {
   return (
@@ -7,9 +8,9 @@ const Topbar = (props) => {
       <div className="title">JobSeeker</div>
       <nav>
         <ul>
-          <li>Home</li>
-          <li>JobSeeker</li>
-          <li>Recruiters</li>
+          <Link to="/"><li>Home</li></Link>
+          <Link to="/jobs"><li>JobSeeker</li></Link>
+          <Link to="recruiters"><li>Recruiters</li></Link>
         </ul>
       </nav>
     </div>
