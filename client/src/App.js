@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import Topbar from './components/Topbar/Topbar';
+import Home from './containers/Home/Home';
+
 class App extends Component {
   render() {
     return (
       <div className="App">
-        Welcome to Job Seeker
+        <Topbar/>
+        <Home/>
       </div>
     );
   }
