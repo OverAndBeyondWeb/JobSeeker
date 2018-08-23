@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 
 import Topbar from './components/Topbar/Topbar';
@@ -9,12 +10,14 @@ import Recruiters from './containers/Recruiters/Recruiters';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Topbar/>
-        <Home/>
-        <Jobs/>
-        <Recruiters/>
-      </div>
+      <Router>
+        <div className="App">
+          <Topbar/>
+          <Route path='/' exact component={Home}/>
+          <Route path='/jobs' component={Jobs}/>
+          <Route path='/recruiters' component={Recruiters}/>
+        </div>
+      </Router>    
     );
   }
 }
