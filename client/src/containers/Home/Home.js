@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import './Home.css';
+
+import LandingPage from '../../components/LandingPage/LandingPage';
 
 class Home extends Component {
 
@@ -9,7 +12,8 @@ class Home extends Component {
   render() {
     return (
       <div>
-        This Is the Home Page
+        This Is the Home Container
+        <LandingPage/>
       </div>
     )
   }

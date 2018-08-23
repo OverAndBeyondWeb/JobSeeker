@@ -3,6 +3,8 @@ import './App.css';
 
 import Topbar from './components/Topbar/Topbar';
 import Home from './containers/Home/Home';
+import Jobs from './containers/Jobs/Jobs';
+import Recruiters from './containers/Recruiters/Recruiters';
 
 class App extends Component {
   render() {
@@ -10,6 +12,8 @@ class App extends Component {
       <div className="App">
         <Topbar/>
         <Home/>
+        <Jobs/>
+        <Recruiters/>
       </div>
     );
   }
