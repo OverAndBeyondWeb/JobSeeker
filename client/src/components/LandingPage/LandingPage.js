@@ -9,6 +9,9 @@ const LandingPage = (props) => {
         <p>Having trouble keeping up with jobs that you have already applied for?  Job Seeker helps you track potential jobs as you apply!</p>
         <button>Get Started!</button>
       </div>
+      <div className="learn-more-scroll">
+        Learn More
+      </div>
     </div>
   )
 };

@@ -1,6 +1,7 @@
 .LandingPage {
   display: flex;
   align-items: center;
+  flex-direction: column;
   height: calc(100vh - 60px);
   background: url('../../images/man_desk_job.jpg') no-repeat center center gray;
   background-size: cover;
@@ -15,4 +16,27 @@
 
 .content-box h1 {
   font-size: 50px;
+}
+
+.learn-more-scroll {
+  color: white;
+  font-weight: bold;
+  padding-bottom: 20px;
+  cursor: pointer;
+  transition: transform .3s;
+}
+
+.learn-more-scroll:hover {
+  transform: scale(1.07);
+}
+
+.learn-more-scroll::after {
+  content: "";
+  display: block;
+  height: 20px;
+  width: 20px;
+  margin: 0 auto;
+  border-right: 5px solid white;
+  border-bottom: 5px solid white;
+  transform: rotate(45deg);
 }
