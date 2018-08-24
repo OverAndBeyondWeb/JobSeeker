@@ -1,0 +1,54 @@
+.Topbar {
+  background: lightgray;
+  border-bottom: 3px solid darkgray;
+  color: darkslategrey
+}
+
+.tb-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.logo {
+  height: 40px;
+}
+
+.logo img {
+  height: 100%;
+  width: auto;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.main-nav {
+
+}
+
+.main-nav ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav ul li {
+  margin-left: 10px;
+  list-style: none;
+}
+
+.main-nav ul a {
+  color: darkgray;
+  text-decoration: none;
+}
+
+.active {
+  color: darkslategray;
+  border-bottom: 2px solid maroon;
+}
+
