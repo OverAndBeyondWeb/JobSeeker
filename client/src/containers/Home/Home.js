@@ -12,7 +12,6 @@ class Home extends Component {
   render() {
     return (
       <div>
-        This Is the Home Container
         <LandingPage/>
       </div>
     )

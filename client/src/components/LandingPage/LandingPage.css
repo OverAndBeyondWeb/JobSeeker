@@ -1,0 +1,18 @@
+.LandingPage {
+  display: flex;
+  align-items: center;
+  height: calc(100vh - 60px);
+  background: url('../../images/man_desk_job.jpg') no-repeat center center gray;
+  background-size: cover;
+}
+
+.content-box {
+  width: 50%;
+  margin: auto;
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, .5);
+}
+
+.content-box h1 {
+  font-size: 50px;
+}
