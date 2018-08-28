@@ -11,14 +11,27 @@ CREATE TABLE company (
 );
 
 CREATE TABLE job (
-  id MEDIUMINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   job_title VARCHAR(30),
   job_number INT,
   job_link VARCHAR(50),
   data_applied DATE,
   screenshot_filename VARCHAR(30),
   company_name VARCHAR(50),
-  concluded BOOLEAN
+  concluded BOOLEAN,
+  FOREIGN KEY(company_name)
+  REFERENCES company(name)
+  ON DELETE SET NULL
+);
+
+CREATE TABLE communication (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  subject VARCHAR(20),
+  type VARCHAR(20),
+  date DATE,
+  job_id INT,
+  point_of_contact_id INT,
+  FOREIGN KEY(job_id) REFERENCES job(id) ON DELETE SET NULL
 );
 
 CREATE TABLE point_of_contact (
@@ -31,7 +44,10 @@ CREATE TABLE point_of_contact (
   email VARCHAR(30) UNIQUE,
   phone VARCHAR(12),
   job_id INT,
-  communication_id INT
+  communication_id INT,
+  FOREIGN KEY(company_name) REFERENCES company(name) ON DELETE SET NULL,
+  FOREIGN KEY(job_id) REFERENCES job(id) ON DELETE SET NULL,
+  FOREIGN KEY(communication_id) REFERENCES communication(id) ON DELETE SET NULL
 );
 
 CREATE TABLE note (
@@ -41,19 +57,15 @@ CREATE TABLE note (
   filename VARCHAR(20),
   date_created DATE,
   job_id INT,
-  company_id INT
+  company_name VARCHAR(50),
+  point_of_contact_id INT,
+  FOREIGN KEY(company_name) REFERENCES company(name) ON DELETE SET NULL,
+  FOREIGN KEY(job_id) REFERENCES job(id) ON DELETE SET NULL,
+  FOREIGN KEY(point_of_contact_id) REFERENCES point_of_contact(id) ON DELETE SET NULL
 );
 
-CREATE TABLE communication (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  subject VARCHAR(20),
-  type VARCHAR(20),
-  date DATE,
-  job_id INT
-);
-
-ALTER TABLE job
-ADD FOREIGN KEY(company_name)
-REFERENCES company(name)
+ALTER TABLE communication
+ADD FOREIGN KEY(point_of_contact_id)
+REFERENCES point_of_contact(id)
 ON DELETE SET NULL;
 
