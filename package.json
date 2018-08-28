@@ -4,7 +4,7 @@
   "description": "job search utility",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "load_schema": "mysql -u root job_tracker_db < schema.sql"
   },
   "repository": {
     "type": "git",
