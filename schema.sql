@@ -15,10 +15,10 @@ CREATE TABLE job (
   job_title VARCHAR(30),
   job_number INT,
   job_link VARCHAR(50),
-  data_applied DATE,
+  date_applied DATETIME NOT NULL DEFAULT NOW(),
   screenshot_filename VARCHAR(30),
   company_name VARCHAR(50),
-  concluded BOOLEAN,
+  active BOOLEAN DEFAULT true,
   FOREIGN KEY(company_name)
   REFERENCES company(name)
   ON DELETE SET NULL

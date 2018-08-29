@@ -4,7 +4,8 @@
   "description": "job search utility",
   "main": "index.js",
   "scripts": {
-    "load_schema": "mysql -u root job_tracker_db < schema.sql"
+    "load_schema": "mysql -u root job_tracker_db < schema.sql",
+    "seed_db": "mysql -u root job_tracker_db < seeds.sql"
   },
   "repository": {
     "type": "git",

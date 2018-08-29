@@ -12,10 +12,7 @@ app.get('/', (req, res) => {
   res.send(`App is running`);
 });
 
-app.post('/', (req, res) => {
-  console.log(req.body.name);
-  res.send(req.body.name);
-});
+app.use('/', require('./routes/apiRoutes'));
 
 
 app.listen(PORT, () => `App listening on port ${PORT}`);
