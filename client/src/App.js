@@ -8,6 +8,10 @@ import Jobs from './containers/Jobs/Jobs';
 import Recruiters from './containers/Recruiters/Recruiters';
 
 class App extends Component {
+
+  state = {
+    modalActive: true
+  }
   render() {
     return (
       <Router>
