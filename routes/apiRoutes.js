@@ -9,5 +9,10 @@ module.exports = (connection) => {
     });
   });
 
+  router.post('/api/jobs', (req, res) => {
+    console.log(req.body);
+    res.send('ok');
+  });
+
   return router;
 }

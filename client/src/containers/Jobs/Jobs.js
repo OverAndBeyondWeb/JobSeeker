@@ -19,7 +19,7 @@ class Jobs extends Component {
   submitForm = (e) => {
     e.preventDefault();
     console.log('submitted');
-    axios.post('/jobs', {this: 'that'})
+    axios.post('/api/jobs', {this: 'that'})
       .then(results => console.log(results))
       .catch(err => console.log(err));
     this.toggleModal();
@@ -28,7 +28,7 @@ class Jobs extends Component {
   render() {
     return (
       <div>
-        {this.state.showModal && <Modal render={() => (<JobForm/>)}/>}
+        {this.state.showModal && <Modal render={() => (<JobForm submitForm={this.submitForm}/>)}/>}
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 container">
           <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 className="h2">Jobs</h1>

@@ -1,7 +1,7 @@
 import React from 'react';
 import './JobForm.css';
 
-const JobForm = () => {
+const JobForm = (props) => {
   return (
     <form className="JobForm container">
       <label htmlFor="title">Title</label>
@@ -19,7 +19,7 @@ const JobForm = () => {
       <label htmlFor="company">Company</label>
       <input id="company" name="company" type="text"/>
 
-      <button type="submit">Submit</button>
+      <button type="submit" onClick={props.submitForm}>Submit</button>
     </form>
   );
 };
