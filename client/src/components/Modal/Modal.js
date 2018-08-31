@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 class Modal extends Component {
 
   state = {
-    on: true
+    on: true,
+    x: <div></div>
   }
 
   toggle = () => {
