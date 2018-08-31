@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import Modal from '../../components/Modal/Modal';
 import JobForm from '../../components/JobForm/JobForm';
@@ -18,6 +19,9 @@ class Jobs extends Component {
   submitForm = (e) => {
     e.preventDefault();
     console.log('submitted');
+    axios.post('/jobs', {this: 'that'})
+      .then(results => console.log(results))
+      .catch(err => console.log(err));
     this.toggleModal();
   }
 
