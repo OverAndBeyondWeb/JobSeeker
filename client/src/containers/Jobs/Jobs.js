@@ -7,7 +7,15 @@ import JobForm from '../../components/JobForm/JobForm';
 class Jobs extends Component {
 
   state = {
-    showModal: false
+    showModal: false,
+    formData: {
+      title: '',
+      'job_number': '',
+      'job_link': '',
+      'date_applied': '',
+      'company_name': ''
+    }
+    
   }
 
   toggleModal = () => {
@@ -16,11 +24,28 @@ class Jobs extends Component {
     });
   }
 
+  handleChange = (e) => {
+    let formData = {...this.state.formData}
+    formData[e.target.name] = e.target.value
+    this.setState({formData});
+  }
+
   submitForm = (e) => {
     e.preventDefault();
     console.log('submitted');
-    axios.post('/api/jobs', {this: 'that'})
-      .then(results => console.log(results))
+    const { formData } = this.state;
+    axios.post('/api/jobs', formData)
+      .then(results => {
+        console.log(results);
+        let formData = {...this.state.formData}
+        formData.title = '';
+        formData['job_number'] = '';
+        formData['job_link'] = '';
+        formData['date_applied'] = '';
+        formData['company_name'] = '';
+
+        this.setState({formData});
+      })
       .catch(err => console.log(err));
     this.toggleModal();
   }
@@ -28,7 +53,7 @@ class Jobs extends Component {
   render() {
     return (
       <div>
-        {this.state.showModal && <Modal render={() => (<JobForm submitForm={this.submitForm}/>)}/>}
+        {this.state.showModal && <Modal render={() => (<JobForm submitForm={this.submitForm} handleChange={this.handleChange}/>)}/>}
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 container">
           <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 className="h2">Jobs</h1>
