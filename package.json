@@ -5,7 +5,13 @@
   "main": "index.js",
   "scripts": {
     "load_schema": "mysql -u root job_tracker_db < schema.sql",
-    "seed_db": "mysql -u root job_tracker_db < seeds.sql"
+    "seed_db": "mysql -u root job_tracker_db < seeds.sql",
+    "client-install": "npm install --prefix client",
+    "client": "npm start --prefix client",
+    "server": "nodemon server.js",
+    "server-install": "npm install",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
