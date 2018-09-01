@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import Modal from '../../components/Modal/Modal';
-import JobForm from '../../components/JobForm/JobForm';
+import RecruiterForm from '../../components/Forms/RecruiterForm/RecruiterForm';
 
 class Recruiters extends Component {
 
   state = {
     showModal: false,
     formData: {
+      fname: '',
+      lname: '',
       title: '',
-      'job_number': '',
-      'job_link': '',
-      'date_applied': '',
+      internal: '',
+      email: '',
+      phone: '',
       'company_name': ''
     }
     
@@ -53,7 +55,7 @@ class Recruiters extends Component {
   render() {
     return (
       <div>
-        {this.state.showModal && <Modal render={() => (<JobForm submitForm={this.submitForm} handleChange={this.handleChange}/>)}/>}
+        {this.state.showModal && <Modal render={() => (<RecruiterForm submitForm={this.submitForm} handleChange={this.handleChange}/>)}/>}
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 container">
           <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 className="h2">Recruiters</h1>
