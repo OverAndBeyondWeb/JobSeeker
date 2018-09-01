@@ -4,7 +4,7 @@ import axios from 'axios';
 import Modal from '../../components/Modal/Modal';
 import JobForm from '../../components/JobForm/JobForm';
 
-class Recruiters extends Component {
+class Companies extends Component {
 
   state = {
     showModal: false,
@@ -56,13 +56,13 @@ class Recruiters extends Component {
         {this.state.showModal && <Modal render={() => (<JobForm submitForm={this.submitForm} handleChange={this.handleChange}/>)}/>}
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 container">
           <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 className="h2">Recruiters</h1>
+            <h1 className="h2">Companies</h1>
             <div className="btn-toolbar mb-2 mb-md-0">
               <div className="btn-group mr-2">
                 <button
                   className="btn btn-sm btn-outline-secondary"
                   onClick={this.toggleModal}
-                >Add Recruiter</button>
+                >Add Company</button>
                 <button className="btn btn-sm btn-outline-secondary">Export</button>
               </div>
               <button className="btn btn-sm btn-outline-secondary dropdown-toggle">
@@ -208,4 +208,4 @@ class Recruiters extends Component {
   }
 };
 
-export default Recruiters;
+export default Companies;

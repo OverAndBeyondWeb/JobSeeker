@@ -14,11 +14,11 @@ const Topbar = (props) => {
           <ul>
             <Link to="/"><li className="active">Home</li></Link>
             <Link to="/jobs"><li>Jobs</li></Link>
+            <Link to="/companies"><li>Companies</li></Link>
             <Link to="recruiters"><li>Recruiters</li></Link>
           </ul>
         </nav>
-      </div>
-      
+      </div>    
     </div>
   )
 };
