@@ -36,14 +36,16 @@ class Recruiters extends Component {
     e.preventDefault();
     console.log('submitted');
     const { formData } = this.state;
-    axios.post('/api/jobs', formData)
+    axios.post('/api/recruiters', formData)
       .then(results => {
         console.log(results);
         let formData = {...this.state.formData}
         formData.title = '';
-        formData['job_number'] = '';
-        formData['job_link'] = '';
-        formData['date_applied'] = '';
+        formData.fname = '';
+        formData.lname = '';
+        formData.internal = '';
+        formData.email = '';
+        formData.phone = '';
         formData['company_name'] = '';
 
         this.setState({formData});

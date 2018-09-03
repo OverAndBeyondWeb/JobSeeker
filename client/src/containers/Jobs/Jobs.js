@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import Modal from '../../components/Modal/Modal';
-import JobForm from '../../components/JobForm/JobForm';
+import JobForm from '../../components/Forms/JobForm/JobForm';
 
 class Jobs extends Component {
 

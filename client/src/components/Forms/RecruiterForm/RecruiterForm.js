@@ -10,7 +10,7 @@ const RecruiterForm = (props) => {
 
       <label htmlFor="lname">Last Name</label>
       <input id="lname" name="lname" type="text" onChange={props.handleChange}/>
-      
+
       <label htmlFor="title">Title</label>
       <input id="title" name="title" type="text" onChange={props.handleChange}/>
 
@@ -18,9 +18,9 @@ const RecruiterForm = (props) => {
       <input id="internal" name="internal" type="text" onChange={props.handleChange}/>
 
       <label htmlFor="email">Email Address</label>
-      <input id="email" name="email" type="email" onChange={props.handleChange}/>
+      <input id="email" name="email" type="text" onChange={props.handleChange}/>
 
-      <label htmlFor="phone">Job Link</label>
+      <label htmlFor="phone">Phone</label>
       <input id="phone" name="phone" type="text" onChange={props.handleChange}/>
       
       <label htmlFor="company_name">Company Name</label>
