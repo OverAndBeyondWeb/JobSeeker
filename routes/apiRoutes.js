@@ -1,6 +1,8 @@
 const router = require('express').Router();
 
 module.exports = (connection) => {
+
+  // Retrieve all 
   router.get('/api/jobs', (req, res) => {
     const query = 'SELECT * FROM job';
     connection.query(query, (err, results, fields) => {
@@ -49,21 +51,19 @@ module.exports = (connection) => {
         console.log(query);
       }
     });
+  });
 
-    router.post('/api/recruiters', (req, res) => {
-      console.log(req.body)
-      res.send('ok');
-    });
+  router.post('/api/recruiters', (req, res) => {
+    console.log(req.body)
+    res.send('ok');
+  });
 
-    router.post('/api/companies', (req, res) => {
-      res.send('ok');
-    })
+  router.post('/api/companies', (req, res) => {
+    res.send('ok');
+  })
 
-    router.post('/test', (req, res) => {
-      res.send('ok test');
-    });
-
-    
+  router.post('/test', (req, res) => {
+    res.send('ok test');
   });
 
   return router;

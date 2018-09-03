@@ -10,6 +10,7 @@
     "client": "npm start --prefix client",
     "server": "nodemon server.js",
     "server-install": "npm install",
+    "full-install": "npm run server-install && npm run client-install",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "start": "node server.js"
   },
