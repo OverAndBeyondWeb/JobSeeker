@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import './Topbar.css';
 import logo from '../../images/jobs_icon.png';
@@ -12,10 +12,10 @@ const Topbar = (props) => {
         <div className="title">JobSeeker</div>
         <nav className="main-nav">
           <ul>
-            <Link to="/"><li className="active">Home</li></Link>
-            <Link to="/jobs"><li>Jobs</li></Link>
-            <Link to="/companies"><li>Companies</li></Link>
-            <Link to="recruiters"><li>Recruiters</li></Link>
+            <li><NavLink to="/">Home</NavLink></li>
+            <li><NavLink to="/jobs">Jobs</NavLink></li>
+            <li><NavLink to="/companies">Companies</NavLink></li>
+            <li><NavLink to="recruiters">Recruiters</NavLink></li>
           </ul>
         </nav>
       </div>    

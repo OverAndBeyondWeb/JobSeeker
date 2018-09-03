@@ -31,32 +31,23 @@ class Companies extends Component {
     e.preventDefault();
     console.log('submitted');
     const { formData } = this.state;
-    axios.post('/api/companies', {a: 'b'});
-    // axios.post('/api/jobs', formData)
-    //   .then(results => {
-    //     console.log(results);
-    //     let formData = {...this.state.formData}
-    //     formData.title = '';
-    //     formData['job_number'] = '';
-    //     formData['job_link'] = '';
-    //     formData['date_applied'] = '';
-    //     formData['company_name'] = '';
+    axios.post('/api/companies', formData)
+      .then(results => {
+        console.log(results);
+        let formData = {...this.state.formData}
+        formData.name = '';
+        formData['web_link'] = '';
+        formData.location = '';
 
-    //     this.setState({formData});
-    //   })
-    //   .catch(err => console.log(err));
+        this.setState({formData});
+      })
+      .catch(err => console.log(err));
     this.toggleModal();
-  }
-
-  test = () => {
-    axios.post('http://localhost:3000/test', {data: 'data'})
-    .catch(err => console.log(err));
   }
 
   render() {
     return (
       <div>
-        <button onClick={this.test}>click</button>
         {this.state.showModal && <Modal render={() => (<CompanyForm submitForm={this.submitForm} handleChange={this.handleChange}/>)}/>}
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 container">
           <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">

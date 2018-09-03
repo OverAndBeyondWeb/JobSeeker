@@ -59,12 +59,9 @@ module.exports = (connection) => {
   });
 
   router.post('/api/companies', (req, res) => {
+    console.log(req.body);
     res.send('ok');
   })
-
-  router.post('/test', (req, res) => {
-    res.send('ok test');
-  });
 
   return router;
 }
