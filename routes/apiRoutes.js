@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const jobsController = require('../controllers/jobs');
+const companiesController = require('../controllers/companies');
 
 module.exports = (connection) => {
 
@@ -16,17 +17,11 @@ module.exports = (connection) => {
     res.send('ok');
   });
 
+  router.get('/api/companies', (req, res) => {
+    companiesController.getAllCompanies(req, res, connection);
+  });
   router.post('/api/companies', (req, res) => {
-    const rb = req.body;
-    let query = `
-      INSERT INTO company (name, web_link, location)
-      VALUES (?, ?, ?)
-    `;
-    connection.query(query, [rb.name, rb['web_link'], rb.location], (err, results, fields) => {
-      if(err) throw err;
-      console.log(results);
-      res.send('ok');
-    });
+    companiesController.insertCompany(req, res, connection);
   });
 
   return router;
