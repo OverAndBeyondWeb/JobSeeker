@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 const connection = mysql.createConnection({
-  host: 'localhost',
+  host: '127.0.0.1',
   user: 'root',
   database: 'job_tracker_db',
   password: ''
@@ -17,7 +17,7 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => {
   if(err) {
-    console.err(`connection error: ${err.stack}`);
+    console.error(`connection error: ${err.stack}`);
     return;
   }
 
