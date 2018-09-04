@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const jobsController = require('../controllers/jobs');
 const companiesController = require('../controllers/companies');
+const recruitersController = require('../controllers/recruiters');
 
 module.exports = (connection) => {
 
@@ -21,10 +22,13 @@ module.exports = (connection) => {
     companiesController.insertCompany(req, res, connection);
   });
   
-  router.post('/api/recruiters', (req, res) => {
-    console.log(req.body);
-    res.send('ok');
+  router.get('/api/recruiters', (req, res) => {
+    recruitersController.getAllRecruiters(req, res, connection);
   });
-  
+
+  router.post('/api/recruiters', (req, res) => {
+    recruitersController.insertRecruiter(req, res, connection);
+  });
+
   return router;
 }
