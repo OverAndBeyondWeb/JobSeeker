@@ -12,17 +12,19 @@ module.exports = (connection) => {
     jobsController.insertJob(req, res, connection);
   });
 
+  
+  router.get('/api/companies', (req, res) => {
+    companiesController.getAllCompanies(req, res, connection);
+  });
+
+  router.post('/api/companies', (req, res) => {
+    companiesController.insertCompany(req, res, connection);
+  });
+  
   router.post('/api/recruiters', (req, res) => {
     console.log(req.body);
     res.send('ok');
   });
-
-  router.get('/api/companies', (req, res) => {
-    companiesController.getAllCompanies(req, res, connection);
-  });
-  router.post('/api/companies', (req, res) => {
-    companiesController.insertCompany(req, res, connection);
-  });
-
+  
   return router;
 }
