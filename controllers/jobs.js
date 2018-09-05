@@ -47,3 +47,17 @@ module.exports.insertJob = (req, res, connection) => {
     }
   });
 }
+
+module.exports.deleteJob = (req, res, connection) => {
+  const query = `
+    DELETE FROM job
+    WHERE id = ?
+  `;
+  
+  const id = +req.body.id;
+  
+  connection.query(query, [id], (err, results, fields) => {
+    if(err) throw err;
+    console.log(results);
+  });
+};

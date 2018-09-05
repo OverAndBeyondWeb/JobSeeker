@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Modal from '../../components/Modal/Modal';
 import JobForm from '../../components/Forms/JobForm/JobForm';
+import Job from '../../components/Job/Job';
 
 class Jobs extends Component {
 
@@ -58,6 +59,15 @@ class Jobs extends Component {
     this.toggleModal();
   }
 
+  deleteJob = (id) => {
+    console.log(id);
+    axios.delete('/api/jobs', {data:{id}})
+      .then(results => {
+        console.log('deleted');
+      })
+      .catch(err => console.log(err));
+  }
+
   render() {
     return (
       <div>
@@ -97,18 +107,7 @@ class Jobs extends Component {
               </thead>
               <tbody>
                 {this.state.jobData.map(job => (
-                  <tr key={job.id}>
-                    <td>{job['active']}</td>
-                    <td>{job['company_name']}</td>
-                    <td>{job['job_title']}</td>
-                    <td>{job['job_link']}</td>
-                    <td>{job['date_applied'].substring(0, 10)}</td>
-                    <td>
-                      <button>Delete</button>
-                      <button>Edit</button>
-                    </td>
-                    
-                  </tr>
+                  <Job job={job} delete={() => this.deleteJob(job.id)} key={job.id}/>
                 ))}
               </tbody>
             </table>

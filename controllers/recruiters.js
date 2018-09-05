@@ -21,7 +21,6 @@ module.exports.insertRecruiter = (req, res, connection) => {
     VALUES (?)
   `;
   
-
   connection.query(query1, (err, results, fields) => {
     if(err) throw err;
     console.log(rb['company_name']);
@@ -46,4 +45,18 @@ module.exports.insertRecruiter = (req, res, connection) => {
       console.log(query);
     }
   });
-}
+};
+
+module.exports.deleteJob = (req, res, connection) => {
+  const query = `
+    DELETE FROM job
+    WHERE id = ?
+  `;
+  const id = +req.body.id;
+  // console.log(typeof id);
+  // console.log('typeof id');
+  // connection.query(query, [id], (err, results, fields) => {
+  //   if(err) throw err;
+  //   console.log(results);
+  // });
+};
