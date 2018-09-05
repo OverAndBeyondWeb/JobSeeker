@@ -63,7 +63,10 @@ class Jobs extends Component {
     console.log(id);
     axios.delete('/api/jobs', {data:{id}})
       .then(results => {
+        console.log(results);
         console.log('deleted');
+        let jobData = this.state.jobData.filter(job => job.id !== id);
+        this.setState({jobData});
       })
       .catch(err => console.log(err));
   }

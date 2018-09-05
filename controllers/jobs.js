@@ -53,11 +53,11 @@ module.exports.deleteJob = (req, res, connection) => {
     DELETE FROM job
     WHERE id = ?
   `;
-  
+
   const id = +req.body.id;
   
   connection.query(query, [id], (err, results, fields) => {
     if(err) throw err;
-    console.log(results);
+    res.send('ok');
   });
 };
