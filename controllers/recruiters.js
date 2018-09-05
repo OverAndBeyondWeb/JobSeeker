@@ -47,11 +47,12 @@ module.exports.insertRecruiter = (req, res, connection) => {
   });
 };
 
-module.exports.deleteJob = (req, res, connection) => {
+module.exports.deleteContact = (req, res, connection) => {
   const query = `
-    DELETE FROM job
+    DELETE FROM point_of_contact
     WHERE id = ?
   `;
+
   const id = +req.body.id;
   // console.log(typeof id);
   // console.log('typeof id');
