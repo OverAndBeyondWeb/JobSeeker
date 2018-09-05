@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import Modal from '../../components/Modal/Modal';
+import Recruiter from '../../components/Recruiter/Recruiter';
 import RecruiterForm from '../../components/Forms/RecruiterForm/RecruiterForm';
 
 class Recruiters extends Component {
@@ -62,6 +63,10 @@ class Recruiters extends Component {
     this.toggleModal();
   }
 
+  deleteRecruiter = (id) => {
+    console.log(id);
+  }
+
   render() {
     return (
       <div>
@@ -101,14 +106,7 @@ class Recruiters extends Component {
               </thead>
               <tbody>
                 {this.state.recruiterData.map(recruiter => (
-                  <tr>
-                    <td>{recruiter.internal}</td>
-                    <td>{recruiter.fname}</td>
-                    <td>{recruiter.lname}</td>
-                    <td>{recruiter.title}</td>
-                    <td>{recruiter['company_name']}</td>
-                    <td><button>delete</button><button>edit</button></td>
-                  </tr>
+                  <Recruiter recruiter={recruiter} delete={this.deleteRecruiter } key={recruiter.id}/>
                 ))}
               </tbody>
             </table>
