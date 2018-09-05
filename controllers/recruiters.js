@@ -54,10 +54,10 @@ module.exports.deleteContact = (req, res, connection) => {
   `;
 
   const id = +req.body.id;
-  // console.log(typeof id);
-  // console.log('typeof id');
-  // connection.query(query, [id], (err, results, fields) => {
-  //   if(err) throw err;
-  //   console.log(results);
-  // });
+  console.log(typeof id);
+  console.log('typeof id');
+  connection.query(query, [id], (err, results, fields) => {
+    if(err) throw err;
+    res.send('ok');
+  });
 };

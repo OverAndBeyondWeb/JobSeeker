@@ -34,5 +34,9 @@ module.exports = (connection) => {
     recruitersController.insertRecruiter(req, res, connection);
   });
 
+  router.delete('/api/recruiters', (req, res) => {
+    recruitersController.deleteContact(req, res, connection);
+  })
+
   return router;
 }

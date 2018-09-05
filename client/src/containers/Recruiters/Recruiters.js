@@ -64,7 +64,12 @@ class Recruiters extends Component {
   }
 
   deleteRecruiter = (id) => {
-    console.log(id);
+    axios.delete('/api/recruiters', {data: {id}})
+      .then(results => {
+        let recruiterData = this.state.recruiterData.filter(recruiter => recruiter.id !== id);
+
+        this.setState({recruiterData});
+      })
   }
 
   render() {
