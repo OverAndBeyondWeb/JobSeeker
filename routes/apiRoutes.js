@@ -25,6 +25,10 @@ module.exports = (connection) => {
   router.post('/api/companies', (req, res) => {
     companiesController.insertCompany(req, res, connection);
   });
+
+  router.delete('/api/companies', (req, res) => {
+    companiesController.deleteCompany(req, res, connection);
+  })
   
   router.get('/api/recruiters', (req, res) => {
     recruitersController.getAllRecruiters(req, res, connection);
@@ -36,7 +40,7 @@ module.exports = (connection) => {
 
   router.delete('/api/recruiters', (req, res) => {
     recruitersController.deleteContact(req, res, connection);
-  })
+  });
 
   return router;
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import Modal from '../../components/Modal/Modal';
+import Company from '../../components/Company/Company';
 import CompanyForm from '../../components/Forms/CompanyForm/CompanyForm';
 
 class Companies extends Component {
@@ -53,6 +54,15 @@ class Companies extends Component {
     this.toggleModal();
   }
 
+  deleteCompany = (name) => {
+    axios.delete('/api/companies', {data: {name}})
+      .then(results => {
+        const companyData = this.state.companyData.filter(company => company.name !== name);
+        this.setState({companyData});
+      })
+      .catch(err => console.log(err));
+  }
+
   render() {
     return (
       <div>
@@ -91,18 +101,8 @@ class Companies extends Component {
               </thead>
               <tbody>
                 {this.state.companyData.map(company => (
-                  <tr>
-                    <td>4</td>
-                    <td>{company.name}</td>
-                    <td>{company.location}</td>
-                    <td>{company['web_link']}</td>
-                    <td>
-                      <button>delete</button>
-                      <button>edit</button>
-                    </td>
-                  </tr>
+                  <Company company={company} key={company.name} delete={this.deleteCompany}/>
                 ))}
-                
               </tbody>
             </table>
           </div>

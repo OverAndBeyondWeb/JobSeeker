@@ -20,3 +20,15 @@ module.exports.insertCompany = (req, res, connection) => {
       res.send('ok');
     });
 };
+
+module.exports.deleteCompany = (req, res, connection) => {
+  const query = `
+    DELETE FROM company
+    WHERE name = ?
+  `;
+  
+  connection.query(query, [req.body.name], (err, results, fields) => {
+    if(err) throw err;
+    res.send('ok');
+  });
+};
