@@ -29,7 +29,7 @@ module.exports.insertJob = (req, res, connection) => {
     if (results.map(result => result.name).indexOf(rb['company_name']) === -1) {
       connection.query(query2, [rb['company_name']], (err, results, fields) => {
         if(err) throw err;
-        connection.query(query, [rb['title'], rb['job_number'], rb['job_link'], rb['company_name']], (err, results, fields) => {
+        connection.query(query, [rb['job_title'], rb['job_number'], rb['job_link'], rb['company_name']], (err, results, fields) => {
           if(err) throw err;
           console.log(results);
           res.send('ok');
@@ -37,7 +37,7 @@ module.exports.insertJob = (req, res, connection) => {
         console.log(query);
       });
     }else {
-      connection.query(query, [rb['title'], rb['job_number'], rb['job_link'], rb['company_name']], (err, results, fields) => {
+      connection.query(query, [rb['job_title'], rb['job_number'], rb['job_link'], rb['company_name']], (err, results, fields) => {
         if(err) throw err;
         console.log(results);
         console.log('already inserted');

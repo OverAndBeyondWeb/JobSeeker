@@ -47,7 +47,7 @@ class Jobs extends Component {
       .then(results => {
         console.log(results);
         let formData = {...this.state.formData}
-        formData.title = '';
+        formData['job_title'] = '';
         formData['job_number'] = '';
         formData['job_link'] = '';
         formData['date_applied'] = '';
@@ -57,6 +57,14 @@ class Jobs extends Component {
       })
       .catch(err => console.log(err));
     this.toggleModal();
+  }
+
+  editJob = (id) => {
+    var job = this.state.jobData.find(job => job.id === id);
+    console.log(job);
+    this.toggleModal();
+    this.setState({formData: job});
+    
   }
 
   deleteJob = (id) => {
@@ -74,7 +82,7 @@ class Jobs extends Component {
   render() {
     return (
       <div>
-        {this.state.showModal && <Modal render={() => (<JobForm submitForm={this.submitForm} handleChange={this.handleChange}/>)}/>}
+        {this.state.showModal && <Modal render={() => (<JobForm submitForm={this.submitForm} handleChange={this.handleChange} formData={this.state.formData}/>)}/>}
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 container">
           <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 className="h2">Jobs</h1>
@@ -110,7 +118,7 @@ class Jobs extends Component {
               </thead>
               <tbody>
                 {this.state.jobData.map(job => (
-                  <Job job={job} delete={() => this.deleteJob(job.id)} key={job.id}/>
+                  <Job job={job} delete={() => this.deleteJob(job.id)} edit={() => this.editJob(job.id)} key={job.id}/>
                 ))}
               </tbody>
             </table>
