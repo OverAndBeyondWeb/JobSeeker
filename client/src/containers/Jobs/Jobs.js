@@ -62,9 +62,15 @@ class Jobs extends Component {
   editJob = (id) => {
     var job = this.state.jobData.find(job => job.id === id);
     console.log(job);
-    this.toggleModal();
+
+    // Replace null values with empty string
+    for (let prop in job) {
+      if(job[prop] === null) {
+        job[prop] = '';
+      }
+    }
     this.setState({formData: job});
-    
+    this.toggleModal(); 
   }
 
   deleteJob = (id) => {
