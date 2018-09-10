@@ -23,6 +23,10 @@ class Jobs extends Component {
   }
 
   componentDidMount() {
+    this.getJobsFromApi();
+  }
+
+  getJobsFromApi = () => {
     axios.get('/api/jobs')
       .then(results => {
         this.setState({jobData: results.data});
@@ -64,6 +68,7 @@ class Jobs extends Component {
         formData['company_name'] = '';
 
         this.setState({formData});
+        this.getJobsFromApi();
       })
       .catch(err => console.log(err));
   }
