@@ -47,7 +47,6 @@ class Jobs extends Component {
   }
 
   openJobForm = (form, activeJobId) => {
-    console.log(this.state[form]);
     this.setState({
       [form]:!this.state[form],
       activeJobId
