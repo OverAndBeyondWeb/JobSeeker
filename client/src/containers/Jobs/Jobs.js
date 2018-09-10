@@ -16,6 +16,13 @@ class Jobs extends Component {
       'date_applied': '',
       'company_name': ''
     },
+    prepopulationData: {
+      'job_title': '',
+      'job_number': '',
+      'job_link': '',
+      'date_applied': '',
+      'company_name': ''
+    },
     jobData: [],
     addJobForm: false,
     editJobForm: false
@@ -54,12 +61,13 @@ class Jobs extends Component {
     for (let prop in job) {
       if(job[prop] === null) {
         job[prop] = '';
-      }
-  
-      console.log(job)
-      this.setState({formData: job});
+      } 
     };
-    
+    console.log(job);
+    this.setState({
+      prepopulationData: job,
+      formData: job
+    });
     this.toggleModal();
   }
 
@@ -82,7 +90,12 @@ class Jobs extends Component {
   }
 
   editJob = () => {
-        
+    console.log('edit');
+    // identify changed form fields
+    // to send to the server
+    console.log(this.state.prepopulationData);
+    console.log(this.state.formData);
+    console.log(this.compareFormData(this.state.formData, this.state.prepopulationData));
     
   }
   
@@ -116,6 +129,18 @@ class Jobs extends Component {
     });
   }
 
+  compareFormData = (currentFormData, prepopulationData) => {
+    const dataToUpdate = {};
+
+    for (let prop in prepopulationData) {
+      if (prepopulationData[prop] !== currentFormData[prop]) {
+        dataToUpdate[prop] = currentFormData[prop];
+      }
+    }
+
+    return dataToUpdate;
+  }
+
   render() {
     return (
       <div>
@@ -126,6 +151,7 @@ class Jobs extends Component {
                                   submitForm={this.submitForm}
                                   handleChange={this.handleChange}
                                   formData={this.state.formData}
+                                  prepopulationData={this.state.prepopulationData}
                                 />)}
               />
         }

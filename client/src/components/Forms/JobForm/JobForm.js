@@ -15,11 +15,11 @@ class JobForm extends Component {
   
 
   componentDidMount() {
-    this.jobTitleRef.current.value = this.props.formData['job_title'];
-    this.jobNumberRef.current.value = this.props.formData['job_number'];
-    this.jobLinkRef.current.value = this.props.formData['job_link'];
-    this.dateAppliedRef.current.value = this.props.formData['date_applied'];
-    this.companyNameRef.current.value = this.props.formData['company_name'];
+    this.jobTitleRef.current.value = this.props.prepopulationData['job_title'];
+    this.jobNumberRef.current.value = this.props.prepopulationData['job_number'];
+    this.jobLinkRef.current.value = this.props.prepopulationData['job_link'];
+    this.dateAppliedRef.current.value = this.props.prepopulationData['date_applied'];
+    this.companyNameRef.current.value = this.props.prepopulationData['company_name'];
   }
 
   showUs = () => {
