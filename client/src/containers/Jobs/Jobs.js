@@ -16,7 +16,6 @@ class Jobs extends Component {
       'date_applied': '',
       'company_name': ''
     },
-    activeJobId: null,
     jobData: [],
     addJobForm: false,
     editJobForm: false
@@ -46,11 +45,21 @@ class Jobs extends Component {
     this.setState({formData});
   }
 
-  openJobForm = (form, activeJobId) => {
-    this.setState({
-      [form]:!this.state[form],
-      activeJobId
-    });
+  openJobForm = (form, id) => {
+    this.setState({[form]:!this.state[form]});
+    
+    let job = this.state.jobData.find(job => job.id === id);
+
+    // Replace null values with empty string
+    for (let prop in job) {
+      if(job[prop] === null) {
+        job[prop] = '';
+      }
+  
+      console.log(job)
+      this.setState({formData: job});
+    };
+    
     this.toggleModal();
   }
 
@@ -72,17 +81,9 @@ class Jobs extends Component {
       .catch(err => console.log(err));
   }
 
-  editJob = (id) => {
-    var job = this.state.jobData.find(job => job.id === id);
-    console.log(job);
+  editJob = () => {
+        
     
-    // Replace null values with empty string
-    for (let prop in job) {
-      if(job[prop] === null) {
-        job[prop] = '';
-      }
-    }
-    this.setState({formData: job});
   }
   
   deleteJob = (id) => {
