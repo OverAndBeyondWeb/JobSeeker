@@ -10,13 +10,16 @@ class Jobs extends Component {
   state = {
     showModal: false,
     formData: {
-      title: '',
+      'job_title': '',
       'job_number': '',
       'job_link': '',
       'date_applied': '',
       'company_name': ''
     },
-    jobData: []
+    activeJobId: null,
+    jobData: [],
+    addJobForm: false,
+    editJobForm: false
   }
 
   componentDidMount() {
@@ -39,9 +42,16 @@ class Jobs extends Component {
     this.setState({formData});
   }
 
-  submitForm = (e) => {
-    e.preventDefault();
-    console.log('submitted');
+  openJobForm = (form, activeJobId) => {
+    console.log(this.state[form]);
+    this.setState({
+      [form]:!this.state[form],
+      activeJobId
+    });
+    this.toggleModal();
+  }
+
+  addJob = () => {
     const { formData } = this.state;
     axios.post('/api/jobs', formData)
       .then(results => {
@@ -56,13 +66,12 @@ class Jobs extends Component {
         this.setState({formData});
       })
       .catch(err => console.log(err));
-    this.toggleModal();
   }
 
   editJob = (id) => {
     var job = this.state.jobData.find(job => job.id === id);
     console.log(job);
-
+    
     // Replace null values with empty string
     for (let prop in job) {
       if(job[prop] === null) {
@@ -70,25 +79,51 @@ class Jobs extends Component {
       }
     }
     this.setState({formData: job});
-    this.toggleModal(); 
   }
-
+  
   deleteJob = (id) => {
     console.log(id);
     axios.delete('/api/jobs', {data:{id}})
-      .then(results => {
-        console.log(results);
-        console.log('deleted');
-        let jobData = this.state.jobData.filter(job => job.id !== id);
-        this.setState({jobData});
-      })
-      .catch(err => console.log(err));
+    .then(results => {
+      console.log(results);
+      console.log('deleted');
+      let jobData = this.state.jobData.filter(job => job.id !== id);
+      this.setState({jobData});
+    })
+    .catch(err => console.log(err));
+  }
+  
+  submitForm = (e) => {
+    e.preventDefault();
+    console.log('submitted');
+    if(this.state.addJobForm) {
+      this.addJob();
+    } else if(this.state.editJobForm) {
+      this.editJob();
+    } else {
+      return;
+    }
+    this.toggleModal();
+    this.setState({
+      activeJobId: null,
+      addJobForm: false,
+      editJobForm: false
+    });
   }
 
   render() {
     return (
       <div>
-        {this.state.showModal && <Modal render={() => (<JobForm submitForm={this.submitForm} handleChange={this.handleChange} formData={this.state.formData}/>)}/>}
+        {
+          this.state.showModal 
+          &&  <Modal 
+                render={() => (<JobForm 
+                                  submitForm={this.submitForm}
+                                  handleChange={this.handleChange}
+                                  formData={this.state.formData}
+                                />)}
+              />
+        }
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 container">
           <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 className="h2">Jobs</h1>
@@ -96,7 +131,7 @@ class Jobs extends Component {
               <div className="btn-group mr-2">
                 <button
                   className="btn btn-sm btn-outline-secondary"
-                  onClick={this.toggleModal}
+                  onClick={() => this.openJobForm('addJobForm')}
                 >Add Job</button>
                 <button className="btn btn-sm btn-outline-secondary">Export</button>
               </div>
@@ -124,7 +159,7 @@ class Jobs extends Component {
               </thead>
               <tbody>
                 {this.state.jobData.map(job => (
-                  <Job job={job} delete={() => this.deleteJob(job.id)} edit={() => this.editJob(job.id)} key={job.id}/>
+                  <Job job={job} delete={() => this.deleteJob(job.id)} edit={() => this.openJobForm('editJobForm', job.id)} key={job.id}/>
                 ))}
               </tbody>
             </table>
