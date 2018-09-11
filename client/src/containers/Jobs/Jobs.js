@@ -91,11 +91,14 @@ class Jobs extends Component {
 
   editJob = () => {
     console.log('edit');
-    // identify changed form fields
-    // to send to the server
+    
     console.log(this.state.prepopulationData);
     console.log(this.state.formData);
-    console.log(this.compareFormData(this.state.formData, this.state.prepopulationData));
+    let finalData = this.compareFormData(this.state.formData, this.state.prepopulationData);
+
+    axios.put('api/jobs', finalData)
+      .then(results => console.log(results))
+      .catch(err => console.log(err));
     
   }
   

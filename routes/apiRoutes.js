@@ -13,10 +13,14 @@ module.exports = (connection) => {
     jobsController.insertJob(req, res, connection);
   });
 
+  router.put('/api/jobs', (req, res) => {
+    console.log(req.body);
+    res.end();
+  });
+
   router.delete('/api/jobs', (req, res) => {
     jobsController.deleteJob(req, res, connection)
-  })
-
+  });
   
   router.get('/api/companies', (req, res) => {
     companiesController.getAllCompanies(req, res, connection);
