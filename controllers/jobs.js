@@ -48,6 +48,16 @@ module.exports.insertJob = (req, res, connection) => {
   });
 }
 
+module.exports.editJob = (req, res, connection) => {
+
+  const query = `
+    UPDATE jobs
+    WHERE id = req.body.id
+  `
+  console.log(req.body);
+  res.end();
+}
+
 module.exports.deleteJob = (req, res, connection) => {
   const query = `
     DELETE FROM job

@@ -133,7 +133,7 @@ class Jobs extends Component {
   }
 
   compareFormData = (currentFormData, prepopulationData) => {
-    const dataToUpdate = {};
+    const dataToUpdate = {id: prepopulationData.id};
 
     for (let prop in prepopulationData) {
       if (prepopulationData[prop] !== currentFormData[prop]) {

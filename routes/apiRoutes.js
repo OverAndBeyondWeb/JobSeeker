@@ -14,8 +14,7 @@ module.exports = (connection) => {
   });
 
   router.put('/api/jobs', (req, res) => {
-    console.log(req.body);
-    res.end();
+    jobsController.editJob(req, res, connection);
   });
 
   router.delete('/api/jobs', (req, res) => {
