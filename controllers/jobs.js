@@ -50,12 +50,34 @@ module.exports.insertJob = (req, res, connection) => {
 
 module.exports.editJob = (req, res, connection) => {
 
-  const query = `
-    UPDATE jobs
-    WHERE id = req.body.id
-  `
-  console.log(req.body);
-  res.end();
+  // determine fields to be updated
+  let fieldsArray = Object.entries(req.body);
+
+  console.log(fieldsArray);
+ 
+  // build a query for those particular fields 
+  const buildQueryFieldsToSet = (fieldsArray) => {
+    let builtQuery = `UPDATE jobs`;
+
+    fieldsArray.forEach(([field, value]) => {
+      console.log(field);
+      if(field === 'id') {
+        builtQuery += ` WHERE id = ${value}`;
+      } else {
+        builtQuery += ` SET ${field} = ${value}`
+      }
+    });
+
+    // loop thru fields, adding a set statement each time
+
+    return builtQuery;
+  }
+  
+  const query = buildQueryFieldsToSet(fieldsArray);
+  // execute the query
+  
+  console.log(query);
+  res.send('ok');
 }
 
 module.exports.deleteJob = (req, res, connection) => {
