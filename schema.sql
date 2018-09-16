@@ -18,7 +18,7 @@ CREATE TABLE job (
   date_applied DATETIME NOT NULL DEFAULT NOW(),
   screenshot_filename VARCHAR(30),
   company_name VARCHAR(50),
-  active BOOLEAN DEFAULT true,
+  active VARCHAR(3) DEFAULT 'yes',
   FOREIGN KEY(company_name)
   REFERENCES company(name)
   ON DELETE SET NULL

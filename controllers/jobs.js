@@ -57,14 +57,14 @@ module.exports.editJob = (req, res, connection) => {
  
   // build a query for those particular fields 
   const buildQueryFieldsToSet = (fieldsArray) => {
-    let builtQuery = `UPDATE jobs`;
+    let builtQuery = `UPDATE job`;
 
     fieldsArray.forEach(([field, value]) => {
       console.log(field);
-      if(field === 'id') {
-        builtQuery += ` WHERE id = ${value}`;
+      if(field !== 'id') {
+        builtQuery += ` SET ${field} = ${value}`;
       } else {
-        builtQuery += ` SET ${field} = ${value}`
+        builtQuery += ` WHERE id = ${+value}`;
       }
     });
 
@@ -73,11 +73,18 @@ module.exports.editJob = (req, res, connection) => {
     return builtQuery;
   }
   
-  const query = buildQueryFieldsToSet(fieldsArray);
+  const query = 'UPDATE job  SET job_link = "dfghd" WHERE id = 1'//buildQueryFieldsToSet(fieldsArray);
   // execute the query
+ console.log(query);
+  connection.query(query, (err, results, fields) => {
+    if(err) throw err;
+    console.log(results);
+    
+    res.send('ok');
+  });
   
-  console.log(query);
-  res.send('ok');
+ 
+  
 }
 
 module.exports.deleteJob = (req, res, connection) => {

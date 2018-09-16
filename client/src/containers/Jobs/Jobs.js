@@ -65,7 +65,7 @@ class Jobs extends Component {
     };
     console.log(job);
     this.setState({
-      prepopulationData: job,
+      prepopulationData: job ? job : this.state.prepopulationData,
       formData: job
     });
     this.toggleModal();
