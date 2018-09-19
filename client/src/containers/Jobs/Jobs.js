@@ -183,11 +183,12 @@ class Jobs extends Component {
             <table className="table table-striped table-sm">
               <thead>
                 <tr>
-                  <th>#</th>
+                  
                   <th>Company</th>
                   <th>Title</th>
                   <th>Link</th>
                   <th>Application Date</th>
+                  <th>Active</th>
                   <th>Actions</th>
                 </tr>
               </thead>

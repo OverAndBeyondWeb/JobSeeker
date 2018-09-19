@@ -22,6 +22,7 @@ CREATE TABLE job (
   FOREIGN KEY(company_name)
   REFERENCES company(name)
   ON DELETE SET NULL
+  ON UPDATE CASCADE
 );
 
 CREATE TABLE communication (

@@ -51,39 +51,42 @@ module.exports.insertJob = (req, res, connection) => {
 module.exports.editJob = (req, res, connection) => {
 
   // determine fields to be updated
-  let fieldsArray = Object.entries(req.body);
-
-  console.log(fieldsArray);
+  let fieldsArray = Object.entries(req.body).filter(([field, value]) => field !== 'id');
+  let id = req.body.id;
  
   // build a query for those particular fields 
   const buildQueryFieldsToSet = (fieldsArray) => {
-    let builtQuery = `UPDATE job`;
+    let builtQuery = `UPDATE job SET`;
 
-    fieldsArray.forEach(([field, value]) => {
-      console.log(field);
-      if(field !== 'id') {
-        builtQuery += ` SET ${field} = ${value}`;
-      } else {
-        builtQuery += ` WHERE id = ${+value}`;
-      }
+    fieldsArray.forEach(([field, value], index, array) => {      
+        builtQuery += ` ${field} = ?,`;
     });
+    console.log(builtQuery);
 
-    // loop thru fields, adding a set statement each time
+    
+    builtQuery = builtQuery.slice(0, -1);
+    builtQuery += ` WHERE id = ?`;
 
     return builtQuery;
   }
   
-  const query = 'UPDATE job  SET job_link = "dfghd" WHERE id = 1'//buildQueryFieldsToSet(fieldsArray);
+  const query = 'UPDATE job SET job_link ="rocks" WHERE id = 2';
+  const query2 = buildQueryFieldsToSet(fieldsArray);
   // execute the query
- console.log(query);
-  connection.query(query, (err, results, fields) => {
+  console.log(query);
+  console.log(query2);
+  let queryValuesArray = fieldsArray.map(([field, value]) => value);
+  queryValuesArray = [...queryValuesArray, id.toString()];
+  console.log(queryValuesArray);
+
+  connection.query(query2, queryValuesArray, (err, results, fields) => {
     if(err) throw err;
     console.log(results);
     
     res.send('ok');
   });
   
- 
+  // res.send('ok');
   
 }
 
