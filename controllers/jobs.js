@@ -52,7 +52,7 @@ module.exports.editJob = (req, res, connection) => {
 
   // determine fields to be updated
   let fieldsArray = Object.entries(req.body).filter(([field, value]) => field !== 'id');
-  let id = req.body.id;
+  let { id, ['company_name']: companyName } = req.body;
  
   // build a query for those particular fields 
   const buildQueryFieldsToSet = (fieldsArray) => {
@@ -61,8 +61,6 @@ module.exports.editJob = (req, res, connection) => {
     fieldsArray.forEach(([field, value], index, array) => {      
         builtQuery += ` ${field} = ?,`;
     });
-    console.log(builtQuery);
-
 
     builtQuery = builtQuery.slice(0, -1);
     builtQuery += ` WHERE id = ?`;
@@ -77,19 +75,28 @@ module.exports.editJob = (req, res, connection) => {
   // execute the query
   let queryValuesArray = fieldsArray.map(([field, value]) => value);
   queryValuesArray = [...queryValuesArray, id.toString()];
-  console.log(queryValuesArray);
 
-  // if(req.body[company_name]) {
-  //   // check company table for name
-  //   // if it does not exist insert it
-  // }
-
-  connection.query(query, queryValuesArray, (err, results, fields) => {
-    if(err) throw err;
-    console.log(results);
-    
-    res.send('ok');
-  });
+  
+  if(companyName) {
+    connection.query(`INSERT IGNORE INTO company (name) VALUES ("${companyName}")`, (err, results, fields) => {
+      if(err) throw err;
+      connection.query(query, queryValuesArray, (err, results, fields) => {
+        if(err) throw err;
+        console.log(results);
+       
+        res.send('ok');
+      });
+    });
+    console.log(companyName);
+  } else {
+    connection.query(query, queryValuesArray, (err, results, fields) => {
+      if(err) throw err;
+      console.log(results);
+      
+      res.send('ok');
+    });
+  }
+  
   
   // res.send('ok');
   
