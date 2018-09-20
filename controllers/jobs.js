@@ -63,23 +63,28 @@ module.exports.editJob = (req, res, connection) => {
     });
     console.log(builtQuery);
 
-    
+
     builtQuery = builtQuery.slice(0, -1);
     builtQuery += ` WHERE id = ?`;
 
     return builtQuery;
   }
   
-  const query = 'UPDATE job SET job_link ="rocks" WHERE id = 2';
-  const query2 = buildQueryFieldsToSet(fieldsArray);
+  const query = buildQueryFieldsToSet(fieldsArray);
+
+  
+
   // execute the query
-  console.log(query);
-  console.log(query2);
   let queryValuesArray = fieldsArray.map(([field, value]) => value);
   queryValuesArray = [...queryValuesArray, id.toString()];
   console.log(queryValuesArray);
 
-  connection.query(query2, queryValuesArray, (err, results, fields) => {
+  // if(req.body[company_name]) {
+  //   // check company table for name
+  //   // if it does not exist insert it
+  // }
+
+  connection.query(query, queryValuesArray, (err, results, fields) => {
     if(err) throw err;
     console.log(results);
     
@@ -88,7 +93,8 @@ module.exports.editJob = (req, res, connection) => {
   
   // res.send('ok');
   
-}
+};
+
 
 module.exports.deleteJob = (req, res, connection) => {
   const query = `

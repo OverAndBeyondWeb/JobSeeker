@@ -97,7 +97,10 @@ class Jobs extends Component {
     let finalData = this.compareFormData(this.state.formData, this.state.prepopulationData);
 
     axios.put('api/jobs', finalData)
-      .then(results => console.log(results))
+      .then(results => {
+        console.log(results);
+        this.getJobsFromApi();
+      })
       .catch(err => console.log(err));
     
   }
