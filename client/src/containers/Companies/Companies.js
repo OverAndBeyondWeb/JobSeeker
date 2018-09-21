@@ -57,6 +57,7 @@ class Companies extends Component {
   editCompany = (name) => {
     console.log('edit');
     console.log(name);
+    this.toggleModal();
   }
 
   deleteCompany = (name) => {
