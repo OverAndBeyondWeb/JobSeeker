@@ -81,6 +81,7 @@ class Companies extends Component {
       this.editCompany();
     }
     
+    
     this.toggleModal();
   }
 
