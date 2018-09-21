@@ -53,6 +53,8 @@ class Jobs extends Component {
   }
 
   openJobForm = (form, id) => {
+
+    // Set addJobForm or editJobForm to true 
     this.setState({[form]:!this.state[form]});
     
     let job = this.state.jobData.find(job => job.id === id);
@@ -63,7 +65,6 @@ class Jobs extends Component {
         job[prop] = '';
       } 
     };
-    console.log(job);
     this.setState({
       prepopulationData: job ? job : this.state.prepopulationData,
       formData: job
@@ -90,15 +91,10 @@ class Jobs extends Component {
   }
 
   editJob = () => {
-    console.log('edit');
-    
-    console.log(this.state.prepopulationData);
-    console.log(this.state.formData);
     let finalData = this.compareFormData(this.state.formData, this.state.prepopulationData);
 
     axios.put('api/jobs', finalData)
       .then(results => {
-        console.log(results);
         this.getJobsFromApi();
       })
       .catch(err => console.log(err));

@@ -19,7 +19,9 @@ class Companies extends Component {
       'web_link': '',
       location: ''
     },
-    companyData: []  
+    companyData: [],
+    addCompanyForm: false,
+    editCompanyForm: false 
   }
 
   componentDidMount() {
@@ -45,9 +47,15 @@ class Companies extends Component {
     this.setState({formData});
   }
 
-  submitForm = (e) => {
-    e.preventDefault();
-    console.log('submitted');
+  openCompanyForm = (form, name) => {
+    this.setState({[form]:!this.state[form]});
+
+    let company = this.state.companyData.find(company => company.name === name);
+
+    this.toggleModal();
+  }
+
+  addCompany = () => {
     const { formData } = this.state;
     axios.post('/api/companies', formData)
       .then(results => {
@@ -58,15 +66,26 @@ class Companies extends Component {
         formData.location = '';
 
         this.setState({formData});
+        this.getCompaniesFromApi();
       })
       .catch(err => console.log(err));
+  }
+
+  submitForm = (e) => {
+    e.preventDefault();
+    console.log('submitted');
+
+    if(this.state.addCompanyForm) {
+      this.addCompany();
+    } else if(this.editCompanyForm) {
+      this.editCompany();
+    }
+    
     this.toggleModal();
   }
 
-  editCompany = (name) => {
+  editCompany = () => {
     console.log('edit');
-    console.log(name);
-    this.toggleModal();
   }
 
   deleteCompany = (name) => {
@@ -81,7 +100,16 @@ class Companies extends Component {
   render() {
     return (
       <div>
-        {this.state.showModal && <Modal render={() => (<CompanyForm submitForm={this.submitForm} handleChange={this.handleChange}/>)}/>}
+        {
+          this.state.showModal
+          && <Modal render={() => (<CompanyForm
+                                      submitForm={this.submitForm}
+                                      handleChange={this.handleChange}
+                                      formData={this.state.formData}
+                                      prepopulationData={this.state.prepopulationData}
+                                   />)}
+              />
+        }
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 container">
           <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 className="h2">Companies</h1>
@@ -89,7 +117,7 @@ class Companies extends Component {
               <div className="btn-group mr-2">
                 <button
                   className="btn btn-sm btn-outline-secondary"
-                  onClick={this.toggleModal}
+                  onClick={() => this.openCompanyForm('addCompanyForm')}
                 >Add Company</button>
                 <button className="btn btn-sm btn-outline-secondary">Export</button>
               </div>
@@ -116,7 +144,7 @@ class Companies extends Component {
               </thead>
               <tbody>
                 {this.state.companyData.map(company => (
-                  <Company company={company} key={company.name} delete={this.deleteCompany} edit={this.editCompany}/>
+                  <Company company={company} key={company.name} delete={this.deleteCompany} edit={() => this.openCompanyForm('editCompanyForm', company.name)}/>
                 ))}
               </tbody>
             </table>
