@@ -14,10 +14,19 @@ class Companies extends Component {
       'web_link': '',
       location: ''
     },
+    prepopulation: {
+      name: '',
+      'web_link': '',
+      location: ''
+    },
     companyData: []  
   }
 
   componentDidMount() {
+    this.getCompaniesFromApi();
+  }
+
+  getCompaniesFromApi = () => {
     axios.get('/api/companies')
       .then(results => {
         this.setState({companyData: results.data})
