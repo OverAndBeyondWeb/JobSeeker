@@ -54,6 +54,11 @@ class Companies extends Component {
     this.toggleModal();
   }
 
+  editCompany = (name) => {
+    console.log('edit');
+    console.log(name);
+  }
+
   deleteCompany = (name) => {
     axios.delete('/api/companies', {data: {name}})
       .then(results => {
@@ -101,7 +106,7 @@ class Companies extends Component {
               </thead>
               <tbody>
                 {this.state.companyData.map(company => (
-                  <Company company={company} key={company.name} delete={this.deleteCompany}/>
+                  <Company company={company} key={company.name} delete={this.deleteCompany} edit={this.editCompany}/>
                 ))}
               </tbody>
             </table>

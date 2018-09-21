@@ -9,7 +9,7 @@ const Company = (props) => {
       <td>{props.company['web_link']}</td>
       <td>
         <button onClick={() => props.delete(props.company.name)}>delete</button>
-        <button>edit</button>
+        <button onClick={() => props.edit(props.company.name)}>edit</button>
       </td>
     </tr>
   );
