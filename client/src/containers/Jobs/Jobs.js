@@ -4,6 +4,7 @@ import axios from 'axios';
 import Modal from '../../components/Modal/Modal';
 import JobForm from '../../components/Forms/JobForm/JobForm';
 import Job from '../../components/Job/Job';
+import { compareFormData } from '../../utilityFunctions/util';
 
 class Jobs extends Component {
 
@@ -91,7 +92,7 @@ class Jobs extends Component {
   }
 
   editJob = () => {
-    let finalData = this.compareFormData(this.state.formData, this.state.prepopulationData);
+    let finalData = compareFormData(this.state.formData, this.state.prepopulationData);
 
     axios.put('api/jobs', finalData)
       .then(results => {
@@ -129,18 +130,6 @@ class Jobs extends Component {
       addJobForm: false,
       editJobForm: false
     });
-  }
-
-  compareFormData = (currentFormData, prepopulationData) => {
-    const dataToUpdate = {id: prepopulationData.id};
-
-    for (let prop in prepopulationData) {
-      if (prepopulationData[prop] !== currentFormData[prop]) {
-        dataToUpdate[prop] = currentFormData[prop];
-      }
-    }
-
-    return dataToUpdate;
   }
 
   render() {

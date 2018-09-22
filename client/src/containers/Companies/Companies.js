@@ -4,6 +4,7 @@ import axios from 'axios';
 import Modal from '../../components/Modal/Modal';
 import Company from '../../components/Company/Company';
 import CompanyForm from '../../components/Forms/CompanyForm/CompanyForm';
+import { compareFormData } from '../../utilityFunctions/util';
 
 class Companies extends Component {
 
@@ -102,7 +103,8 @@ class Companies extends Component {
   }
 
   editCompany = () => {
-    console.log('edit');
+    let finalData = compareFormData(this.state.formData, this.state.prepopulationData);
+    console.log(finalData);
   }
 
   deleteCompany = (name) => {
