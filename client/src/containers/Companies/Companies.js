@@ -51,6 +51,17 @@ class Companies extends Component {
     this.setState({[form]:!this.state[form]});
 
     let company = this.state.companyData.find(company => company.name === name);
+    console.log(company, form, name);
+
+    for (let prop in company) {
+      if(company[prop] === null) {
+        company[prop] = '';
+      } 
+    };
+    this.setState({
+      prepopulationData: company ? company : this.state.prepopulationData,
+      formData: company
+    });
 
     this.toggleModal();
   }
@@ -77,12 +88,17 @@ class Companies extends Component {
 
     if(this.state.addCompanyForm) {
       this.addCompany();
-    } else if(this.editCompanyForm) {
+    } else if(this.state.editCompanyForm) {
       this.editCompany();
+    } else {
+      return;
     }
-    
-    
+
     this.toggleModal();
+    this.setState({
+      addCompanyForm: false,
+      editCompanyForm: false
+    });
   }
 
   editCompany = () => {
