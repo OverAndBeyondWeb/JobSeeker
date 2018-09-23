@@ -29,9 +29,13 @@ module.exports = (connection) => {
     companiesController.insertCompany(req, res, connection);
   });
 
+  router.put('/api/companies', (req, res) => {
+    companiesController.updateCompany(req, res, connection);
+  });
+
   router.delete('/api/companies', (req, res) => {
     companiesController.deleteCompany(req, res, connection);
-  })
+  });
   
   router.get('/api/recruiters', (req, res) => {
     recruitersController.getAllRecruiters(req, res, connection);

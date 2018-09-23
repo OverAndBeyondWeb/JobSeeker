@@ -21,6 +21,11 @@ module.exports.insertCompany = (req, res, connection) => {
     });
 };
 
+module.exports.updateCompany = (req, res, connection) => {
+  console.log(req.body);
+  res.send('good');
+};
+
 module.exports.deleteCompany = (req, res, connection) => {
   const query = `
     DELETE FROM company

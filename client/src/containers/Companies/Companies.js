@@ -107,7 +107,7 @@ class Companies extends Component {
     console.log(finalData);
     axios.put('api/companies', finalData)
       .then(results => {
-        this.getJobsFromApi();
+        this.getCompaniesFromApi();
       })
       .catch(err => console.log(err));
   }
