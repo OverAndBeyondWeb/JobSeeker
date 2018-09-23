@@ -30,7 +30,7 @@ module.exports = (connection) => {
   });
 
   router.put('/api/companies', (req, res) => {
-    companiesController.updateCompany(req, res, connection);
+    companiesController.editCompany(req, res, connection);
   });
 
   router.delete('/api/companies', (req, res) => {

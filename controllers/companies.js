@@ -1,3 +1,6 @@
+let { buildQueryFieldsToSet } = require('../utility/util');
+
+
 module.exports.getAllCompanies = (req, res, connection) => {
   const query = `
     SELECT * FROM company
@@ -21,9 +24,23 @@ module.exports.insertCompany = (req, res, connection) => {
     });
 };
 
-module.exports.updateCompany = (req, res, connection) => {
-  console.log(req.body);
-  res.send('good');
+module.exports.editCompany = (req, res, connection) => {
+  
+  let { id } = req.body;
+  let fieldsArray = Object.entries(req.body).filter(([field, value]) => field !== 'id');
+  
+  
+  let query = buildQueryFieldsToSet(fieldsArray, 'company');
+  console.log(query);
+  let queryValuesArray = fieldsArray.map(([field, value]) => value);
+  queryValuesArray = [...queryValuesArray, id.toString()];
+  connection.query(query, queryValuesArray, (err, results, fields) => {
+    if(err) throw err;
+    console.log(results);
+    
+    res.send('ok');
+  });
+
 };
 
 module.exports.deleteCompany = (req, res, connection) => {
