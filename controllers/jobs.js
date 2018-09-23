@@ -1,3 +1,5 @@
+const { buildQueryFieldsToSet } =require('../utility/util');
+
 module.exports.getAllJobs = (req, res, connection) => {
   const query = 'SELECT * FROM job';
   connection.query(query, (err, results, fields) => {
@@ -55,22 +57,7 @@ module.exports.editJob = (req, res, connection) => {
   let { id, ['company_name']: companyName } = req.body;
  
   // build a query for those particular fields 
-  const buildQueryFieldsToSet = (fieldsArray) => {
-    let builtQuery = `UPDATE job SET`;
-
-    fieldsArray.forEach(([field, value], index, array) => {      
-        builtQuery += ` ${field} = ?,`;
-    });
-
-    builtQuery = builtQuery.slice(0, -1);
-    builtQuery += ` WHERE id = ?`;
-
-    return builtQuery;
-  }
-  
-  const query = buildQueryFieldsToSet(fieldsArray);
-
-  
+  const query = buildQueryFieldsToSet(fieldsArray, 'job');
 
   // execute the query
   let queryValuesArray = fieldsArray.map(([field, value]) => value);
@@ -96,9 +83,6 @@ module.exports.editJob = (req, res, connection) => {
       res.send('ok');
     });
   }
-  
-  
-  // res.send('ok');
   
 };
 
