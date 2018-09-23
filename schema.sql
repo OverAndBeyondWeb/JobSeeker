@@ -5,7 +5,8 @@ CREATE DATABASE job_tracker_db;
 USE job_tracker_db;
 
 CREATE TABLE company (
-  name VARCHAR(50) PRIMARY KEY,
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) UNIQUE,
   web_link VARCHAR(30),
   location VARCHAR(20)
 );

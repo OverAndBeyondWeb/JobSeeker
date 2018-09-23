@@ -105,6 +105,11 @@ class Companies extends Component {
   editCompany = () => {
     let finalData = compareFormData(this.state.formData, this.state.prepopulationData);
     console.log(finalData);
+    axios.put('api/companies', finalData)
+      .then(results => {
+        this.getJobsFromApi();
+      })
+      .catch(err => console.log(err));
   }
 
   deleteCompany = (name) => {
