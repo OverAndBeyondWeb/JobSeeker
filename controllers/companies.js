@@ -29,15 +29,13 @@ module.exports.editCompany = (req, res, connection) => {
   let { id } = req.body;
   let fieldsArray = Object.entries(req.body).filter(([field, value]) => field !== 'id');
   
-  
   let query = buildQueryFieldsToSet(fieldsArray, 'company');
-  console.log(query);
+ 
   let queryValuesArray = fieldsArray.map(([field, value]) => value);
   queryValuesArray = [...queryValuesArray, id.toString()];
+
   connection.query(query, queryValuesArray, (err, results, fields) => {
-    if(err) throw err;
-    console.log(results);
-    
+    if(err) throw err;    
     res.send('ok');
   });
 
