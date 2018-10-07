@@ -22,6 +22,10 @@ class Recruiters extends Component {
   }
 
   componentDidMount() {
+    this.getRecruitersFromApi();
+  }
+
+  getRecruitersFromApi = () => {
     axios.get('/api/recruiters')
       .then(results => {
         this.setState({recruiterData: results.data})
@@ -58,6 +62,7 @@ class Recruiters extends Component {
         formData['company_name'] = '';
 
         this.setState({formData});
+        this.getRecruitersFromApi();
       })
       .catch(err => console.log(err));
     this.toggleModal();
