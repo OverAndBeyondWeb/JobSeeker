@@ -18,7 +18,18 @@ class Recruiters extends Component {
       phone: '',
       'company_name': ''
     },
-    recruiterData: []
+    prepopulationData: {
+      fname: '',
+      lname: '',
+      title: '',
+      internal: '',
+      email: '',
+      phone: '',
+      'company_name': ''
+    },
+    recruiterData: [],
+    addRecruiterForm: false,
+    editRecruiterForm: false
   }
 
   componentDidMount() {
@@ -43,6 +54,18 @@ class Recruiters extends Component {
     let formData = {...this.state.formData}
     formData[e.target.name] = e.target.value
     this.setState({formData});
+  }
+
+  openRecruiterForm = () => {
+
+  }
+
+  addRecruiter = () => {
+
+  }
+
+  editRecruiter = () => {
+
   }
 
   submitForm = (e) => {
