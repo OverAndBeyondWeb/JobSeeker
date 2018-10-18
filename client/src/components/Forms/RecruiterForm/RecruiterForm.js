@@ -3,6 +3,18 @@ import './RecruiterForm.css';
 
 class RecruiterForm extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.fnameRef = React.createRef();
+    this.lnameRef = React.createRef();
+    this.titleRef = React.createRef();
+    this.internalRef = React.createRef();
+    this.emailRef = React.createRef();
+    this.phoneRef = React.createRef();
+    this.companyNameRef = React.createRef();
+  }
+
   render() {
     return (
       <form className="RecruiterForm container">
