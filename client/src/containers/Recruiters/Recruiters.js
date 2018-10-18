@@ -56,21 +56,26 @@ class Recruiters extends Component {
     this.setState({formData});
   }
 
-  openRecruiterForm = () => {
+  openRecruiterForm = (form, id) => {
 
+    // Set addJobForm or editJobForm to true 
+    this.setState({[form]:!this.state[form]});
+    
+    // let recruiter = this.state.recruiterData.find(recruiter => recruiter.id === id);
+
+    // for (let value of recruiter) {
+    //   value = value === null ? '' : value;
+    // }
+
+    // this.setState({
+    //   prepopulationData: recruiter ? recruiter : this.state.prepopulationData,
+    //   formData: recruiter
+    // });
+
+    this.toggleModal();
   }
 
   addRecruiter = () => {
-
-  }
-
-  editRecruiter = () => {
-
-  }
-
-  submitForm = (e) => {
-    e.preventDefault();
-    console.log('submitted');
     const { formData } = this.state;
     axios.post('/api/recruiters', formData)
       .then(results => {
@@ -88,7 +93,31 @@ class Recruiters extends Component {
         this.getRecruitersFromApi();
       })
       .catch(err => console.log(err));
+    console.log('confirm added');
+  }
+
+  editRecruiter = () => {
+
+  }
+
+  submitForm = (e) => {
+    e.preventDefault();
+    console.log('submitted');
+    if(this.state.addRecruiterForm) {
+      this.addRecruiter();
+      console.log('added');
+    } else if(this.state.editRecruiterForm) {
+      this.editRecruiter();
+      console.log('edited');
+    } else {
+      return;
+    }
+    
     this.toggleModal();
+    this.setState({
+      addRecruiterForm: false,
+      editRecruiterForm: false
+    });
   }
 
   deleteRecruiter = (id) => {
@@ -111,7 +140,7 @@ class Recruiters extends Component {
               <div className="btn-group mr-2">
                 <button
                   className="btn btn-sm btn-outline-secondary"
-                  onClick={this.toggleModal}
+                  onClick={() => this.openRecruiterForm('addRecruiterForm')}
                 >Add Recruiter</button>
                 <button className="btn btn-sm btn-outline-secondary">Export</button>
               </div>
@@ -139,7 +168,7 @@ class Recruiters extends Component {
               </thead>
               <tbody>
                 {this.state.recruiterData.map(recruiter => (
-                  <Recruiter recruiter={recruiter} delete={this.deleteRecruiter } key={recruiter.id}/>
+                  <Recruiter recruiter={recruiter} delete={this.deleteRecruiter } edit={() => this.openRecruiterForm('editRecruiterForm', recruiter.id)} key={recruiter.id}/>
                 ))}
               </tbody>
             </table>
