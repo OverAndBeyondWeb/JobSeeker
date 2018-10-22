@@ -9,8 +9,8 @@ const Recruiter = (props) => {
       <td>{props.recruiter.title}</td>
       <td>{props.recruiter['company_name']}</td>
       <td>
-        <button onClick={() => props.delete(props.recruiter.id)}>delete</button>
-        <button>edit</button>
+        <button onClick={props.delete}>delete</button>
+        <button onClick={props.edit}>edit</button>
       </td>
     </tr>
   );

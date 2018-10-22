@@ -58,19 +58,21 @@ class Recruiters extends Component {
 
   openRecruiterForm = (form, id) => {
 
-    // Set addJobForm or editJobForm to true 
+    // Set addrecruiterForm or editJobForm to true 
     this.setState({[form]:!this.state[form]});
     
-    // let recruiter = this.state.recruiterData.find(recruiter => recruiter.id === id);
+    let recruiter = this.state.recruiterData.find(recruiter => recruiter.id === id);
 
-    // for (let value of recruiter) {
-    //   value = value === null ? '' : value;
-    // }
+    for (let prop in recruiter) {
+      if(recruiter[prop] === null) {
+        recruiter[prop] = '';
+      } 
+    };
 
-    // this.setState({
-    //   prepopulationData: recruiter ? recruiter : this.state.prepopulationData,
-    //   formData: recruiter
-    // });
+    this.setState({
+      prepopulationData: recruiter ? recruiter : this.state.prepopulationData,
+      formData: recruiter
+    });
 
     this.toggleModal();
   }
@@ -132,7 +134,7 @@ class Recruiters extends Component {
   render() {
     return (
       <div>
-        {this.state.showModal && <Modal render={() => (<RecruiterForm submitForm={this.submitForm} handleChange={this.handleChange}/>)}/>}
+        {this.state.showModal && <Modal render={() => (<RecruiterForm submitForm={this.submitForm} handleChange={this.handleChange} prepopulationData={this.state.prepopulationData}/>)}/>}
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 container">
           <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 className="h2">Recruiters</h1>
@@ -168,7 +170,7 @@ class Recruiters extends Component {
               </thead>
               <tbody>
                 {this.state.recruiterData.map(recruiter => (
-                  <Recruiter recruiter={recruiter} delete={this.deleteRecruiter } edit={() => this.openRecruiterForm('editRecruiterForm', recruiter.id)} key={recruiter.id}/>
+                  <Recruiter recruiter={recruiter} delete={() => this.deleteRecruiter(recruiter.id) } edit={() => this.openRecruiterForm('editRecruiterForm', recruiter.id)} key={recruiter.id}/>
                 ))}
               </tbody>
             </table>
